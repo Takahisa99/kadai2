@@ -17,16 +17,14 @@ class BooksController < ApplicationController
     end
   end
 
-
-
-
   def index
-    @books = Book.page(params[:page])
+    @books = Book.all
   end
 
   def show
     @book = Book.find(params[:id])
     @post_comment = PostComment.new
+    @books = Book.new
   end
 
 
