@@ -19,20 +19,35 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @book = Book.new
+    @user = current_user
   end
 
   def show
     @book = Book.find(params[:id])
     @post_comment = PostComment.new
     @books = Book.new
+    @user = current_user
   end
 
+  def edit
+    @book = Book.find(params[:id])
+    end
 
-  def update
+
+
+    def update
     book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to_book_path(book.id)
+    if book.update(book_params)
+      flash[:notice]= 'You have updated book successfully.'
+      redirect_to book_path(book.id)
+    else
+      @book = Book.all
+      render :edit
+    end
   end
+
+
 
 
   def destroy
@@ -44,6 +59,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:shop_name, :image, :caption)
+    params.require(:book).permit(:title, :image, :body)
   end
 end
