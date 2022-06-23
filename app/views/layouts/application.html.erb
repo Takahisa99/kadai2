@@ -12,9 +12,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100">
+  <body>
 
-    <header class="shadow-sm">
+    <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand p-3" href="/"><span>Bookers</span></a>
@@ -37,7 +37,7 @@
 
 
             <li class="nav-item">
-              <%= link_to  users_path(current_user.id), class: 'nav-link text-light' do  %>
+              <%= link_to  users_path , class: 'nav-link text-light' do  %>
               <i class="fas fa-users"></i>
               Users
               <% end %>
@@ -49,7 +49,7 @@
             <li class="nav-item">
               <%= link_to  books_path , class: 'nav-link text-light' do %>
               <i class="fas fa-book-open"></i>
-              Book
+              Books
               <% end %>
             </li>
 
@@ -102,12 +102,9 @@
       </nav>
     </header>
     <div class= notifications>
-    <% flash.each do |key, value| %>
-     <%= content_tag(:div,value, class:key) %>
 
-
-    <% end %>
     </div>
+     <%= flash[:notice] %>
 
     <%= yield %>
     <footer>
